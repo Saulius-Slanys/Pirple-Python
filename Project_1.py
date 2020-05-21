@@ -6,6 +6,7 @@ Game Conect 4
 ROW = 7
 COL = 6
 
+# This function draws a game board
 def drawField(field):
 	for row in range(11):
 		if row % 2 == 0:
@@ -22,7 +23,7 @@ def drawField(field):
 		else:
 			print('-------------')
 
-
+# This function creates list with moves in diagonal
 diagonalRightList = []
 # This function is modified Nikita Tiwari code https://www.geeksforgeeks.org/zigzag-or-diagonal-traversal-of-matrix/
 def diagonalRight(matrix):
@@ -45,7 +46,8 @@ def diagonalRight(matrix):
 			lineList.append((matrix[min(ROW, line) - j - 1][start_col + j]))
 		diagonalRightList.append(lineList)
 		lineList = []
-    
+
+# This function creates list with moves in diagonal		
 diagonalLeftList = []
 # This function is modified Nikita Tiwari code https://www.geeksforgeeks.org/zigzag-or-diagonal-traversal-of-matrix/
 def diagonalLeft(matrix):
@@ -70,7 +72,7 @@ def diagonalLeft(matrix):
 		lineList = []
 
 
-def checkHorizontal(Win):			#This function checks if player conected 4 in row
+def checkHorizontal(Win):			# This function checks if player conected 4 in row
 	for i in range(6):
 		piece = 0
 		for j in range(7):
@@ -81,7 +83,7 @@ def checkHorizontal(Win):			#This function checks if player conected 4 in row
 			elif currentField[j][i] != Win:
 				piece = 0
 
-def checkVertical(Win):				#This function checks if player conected 4 in column
+def checkVertical(Win):				# This function checks if player conected 4 in column
 	for i in range(6, -1, -1):
 		piece = 0
 		column = currentField[i]
@@ -96,7 +98,7 @@ def checkVertical(Win):				#This function checks if player conected 4 in column
 				piece = 0
 
 
-def checkDiagonalRight(Win):
+def checkDiagonalRight(Win):			# This function checks if player conected 4 in diagonal
 	for i in range(len(diagonalRightList)):
 		piece = 0
 		for j in range(len(diagonalRightList[i])):
@@ -108,7 +110,7 @@ def checkDiagonalRight(Win):
 				piece = 0
 
 
-def checkDiagonalLeft(Win):
+def checkDiagonalLeft(Win):			# This function checks if player conected 4 in diagonal
 	for i in range(len(diagonalLeftList)):
 		piece = 0
 		for j in range(len(diagonalLeftList[i])):
@@ -130,24 +132,23 @@ currentField = [[' ', ' ', ' ', ' ', ' ', ' '],
 		[' ', ' ', ' ', ' ', ' ', ' ']]
 drawField(currentField)
 
-#print(diagonalRight)
 
-
+# Main program of the game
 while(True):
-	print('Players turn:', Player)
-	MoveColumn = int(input('Please enter the column\n')) - 1	#Replaces 0-th column with first column
-	if MoveColumn > 6:											#Out of board
+	print('Players turn:', Player)					# Indicates which players move
+	MoveColumn = int(input('Please enter the column\n')) - 1	# Replaces 0-th column with first column
+	if MoveColumn > 6:						# Out of board
 		print('Out of game board')
 		print('Retray')
-		pass
+		pass							# Returns move to player if selected column is out of board
 	elif Player == 1:
 		# Make move for first player
 		for row in range(5, -1, -1):
 			if currentField[MoveColumn][row] == ' ':
-				currentField[MoveColumn][row] = 'X' #u'\u2B24' I can not figure out how to use colorfull unicode symbols on Python 3.8.0 Shell on Windows 10
+				currentField[MoveColumn][row] = 'X' 
 				Player = 2
 				break
-			elif currentField[MoveColumn][0] != ' ':	#Returns move to first player if column is full
+			elif currentField[MoveColumn][0] != ' ':	# Returns move to first player if column is full
 				print('This column is full')
 				print('Choose other column')
 				player = 1
@@ -178,10 +179,10 @@ while(True):
 		# Make move for second player
 		for row in range(5, -1, -1):
 			if currentField[MoveColumn][row] == ' ':
-				currentField[MoveColumn][row] = 'O' #u'\u2B58' I can not figure out how to use colorfull unicode symbols on Python 3.8.0 Shell on Windows 10
+				currentField[MoveColumn][row] = 'O' 
 				Player = 1
 				break
-			elif currentField[MoveColumn][0] != ' ':	#Returns move to second player if column is full
+			elif currentField[MoveColumn][0] != ' ':	# Returns move to second player if column is full
 				print('This column is full')
 				print('Choose other column')
 				player = 2
